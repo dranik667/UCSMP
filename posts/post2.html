@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+</html>
+
+<head>
+    <title>Unburning and Collapse SMP</title>
+    <link rel="stylesheet" href="sheet.css">
+    <link rel="icon" type="image/x-icon" href="../img/minecraft_logo.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="nav-links" id="navLinks">
+            <div class="dropdown">
+                <button class="button" onclick="toggleMenu()">&#9776;</button>
+                <div class="dropdown-content" id="dropdownMenu">
+                    <a href="../chrsheets/soon.html">Кредиты</a>
+                    <a href="../index.html#contact">Обратная связь</a>
+                    <a href="../chrsheets/soon.html">О нас</a>
+                    <a href="../gallery.html">Галерея</a>
+                </div>
+            </div>
+
+            <a href="../lore.html">Лор</a>
+            <a href="../character-bios.html">Анкеты персонажей</a>
+            <a href="../index.html">Главная</a>
+        </div>
+    </div>
+
+    <div class="post">
+        <img src="img/concept.jpg" alt="Флаг Матера" class="banner-image">
+
+        <h1>КОНЦЕПЦИЯ СМЕРТИ</h1>
+
+        <p>
+            Человек (и любое другое существо) имеет 4 жизни. С каждой смертью он теряет 1/4 своей памяти. Самая первая
+            гибель забирает не слишком много воспоминаний, в отличие от последующих, чей ущерб увеличивается.
+            <br><br>
+            Например: <br>
+            После первой смерти, можно забыть свой любимый цвет, а после третьей забыть как ходить и, того хуже, собственный
+            язык.
+            <br><br>
+            После последней смерти, человек становится новым созданием. Имеет то же тело, разве что с некоторыми
+            Именно поэтому на сервере белый это цвет смерти и является синонимом этого слова.
+            <br><br>
+            <i>И если это был ваш друг то смиритесь, теперь он незнакомец который понятия не имеет о вашей дружбе в
+            прошлом&#92432;⭒๋࣭</i>
+        </p>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("dropdownMenu");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.button')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+
+    </script>
+</body>

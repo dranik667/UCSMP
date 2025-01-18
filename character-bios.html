@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список персонажей</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #eadab3;
+            color: #4a4a4a;
+            margin: 0;
+            padding: 0px;
+        }
+
+        .header {
+            background-color: #ffffff;
+            color: #131227;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+        }
+
+        @font-face {
+            font-family: Tektur;
+            src: url(fonts/Tektur-VariableFont_wdth\,wght.ttf);
+        }
+
+        @font-face {
+            font-family: Rubik;
+            src: url(fonts/RubikMonoOne-Regular.ttf);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            flex-grow: 1;
+            align-items: center;
+        }
+
+        a {
+            color: #3f2813;
+        }
+
+        a:hover {
+            color: #A77e31;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .button {
+            background-color: #999999;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #3d3d3d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                background-color: #333;
+                width: 100%;
+                top: 50px;
+                left: 0;
+                z-index: 1;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+                font-size: 24px;
+            }
+        }
+
+        h1 {
+            font-family: 'Tektur', sans-serif;
+            color: #333333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #ffffff;
+            border: 1px solid #e0d8c7;
+            border-radius: 8px;
+            font-family: Rubik;
+        }
+
+        .filter-container label {
+            font-weight: bold;
+        }
+
+        .filter-container select {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #f9f6ef;
+        }
+
+        .character-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .character-list li {
+            padding: 10px;
+            border: 1px solid #e0d8c7;
+            border-radius: 8px;
+            background: #ffffff;
+            margin-bottom: 10px;
+            font-family: Rubik, sans-serif;
+        }
+
+        .character-list li:hover {
+            background: #f2ebdb;
+        }
+
+        .details-button {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 5px 10px;
+            text-decoration: none;
+            background-color: #f2deb1;
+            color: #333;
+            font-family: Rubik, sans-serif;
+            font-size: 14px;
+            border: 1px solid #d9c89e;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .details-button:hover {
+            background-color: #e8d2a1;
+            border-color: #cbb58c;
+        }
+
+        .filter-container button {
+            margin-left: auto;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3f2813;
+            color: white;
+            font-family: Rubik, sans-serif;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .filter-container button:hover {
+            background-color: #A77e31;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="nav-links" id="navLinks">
+            <div class="dropdown">
+                <button class="button" onclick="toggleMenu()">&#9776;</button>
+                <div class="dropdown-content" id="dropdownMenu">
+                    <a href="chrsheets/soon.html" class="transition-link">Кредиты</a>
+                    <a href="index.html#contact" class="transition-link">Обратная связь</a>
+                    <a href="chrsheets/soon.html" class="transition-link">О нас</a>
+                    <a href="gallery.html" class="transition-link">Галлерея</a>
+                </div>
+            </div>
+
+            <a href="lore.html">Лор</a>
+            <a href="character-bios.html">Анкеты персонажей</a>
+            <a href="index.html">Главная</a>
+
+        </div>
+    </div>
+
+    <h1>Список персонажей</h1>
+
+    <!-- Фильтры -->
+    <div class="filter-container">
+        <label for="sort">Сортировать по:</label>
+        <select id="sort">
+            <option value="name">Имени</option>
+            <option value="age">Возрасту</option>
+            <option value="race">Расе</option>
+            <option value="group">Гендеру</option>
+        </select>
+
+        <label for="filter-race">Фильтр по расе:</label>
+        <select id="filter-race">
+            <option value="">Все</option>
+            <option value="человек">Человек</option>
+            <option value="вампир">Вампир</option>
+            <option value="слайм">Слайм</option>
+            <option value="моль">Моль</option>
+            <option value="кукла">Кукла</option>
+            <option value="сова">Сова</option>
+            <option value="фенек">Фенек</option>
+        </select>
+
+        <label for="filter-group">Фильтр по гендеру:</label>
+        <select id="filter-group">
+            <option value="">Все</option>
+            <option value="муж">Мужчины</option>
+            <option value="жен">Женщины</option>
+            <option value="другое">Другое</option>
+        </select>
+
+        <button  onClick="window.location.reload();" id="reset-filters" class="button">Сбросить параметры</button>
+    </div>
+
+    <!-- Список персонажей -->
+    <ul class="character-list" id="character-list">
+        <li data-name="Табадай" data-age="22" data-race="человек" data-group="муж">
+            Табадай - Человек, 22 года, пол мужской
+            <a href="chrsheets/soon.html" class="details-button">Подробнее</a>
+        </li>
+        <li data-name="Амёба" data-age="1" data-race="кукла" data-group="жен">
+            Амёба - Кукла, 1 год, пол женский
+            <a href="chrsheets/soon.html" class="details-button">Подробнее</a>
+        </li>
+        <li data-name="Юлиана" data-age="23" data-race="вампир" data-group="другое">
+            Юлиана Мюррей - Вампир, 23 года, гермафродит
+            <a href="chrsheets/soon.html" class="details-button">Подробнее</a>
+        </li>
+        <li data-name="Ацора" data-age="нет" data-race="слайм" data-group="жен">
+            Ацора - Слайм, нет данных, пол женский
+            <a href="chrsheets/soon.html" class="details-button">Подробнее</a>
+        </li>
+        <li data-name="Кеннет" data-age="16" data-race="сова" data-group="муж">
+            Кеннет - Человек-сова, 16 лет, пол мужской
+            <a href="chrsheets/soon.html" class="details-button">Подробнее</a>
+        </li>
+        <li data-name="Матэо" data-age="34" data-race="моль" data-group="муж">
+            Матэо - Моль, 34 года, пол мужской
+            <a href="chrsheets/soon.html" class="details-button">Подробнее</a>
+        </li>
+        <li data-name="Морзе" data-age="23" data-race="моль" data-group="жен">
+            Морзе - Моль, 23 года, пол женский
+            <a href="chrsheets/soon.html" class="details-button">Подробнее</a>
+        </li>
+        <li data-name="Долорез" data-age="19" data-race="фенек" data-group="жен">
+            Долорез - Фенек, 19 лет, пол женский
+            <a href="chrsheets/soon.html" class="details-button">Подробнее</a>
+        </li>
+        <li data-name="Юэ" data-age="21" data-race="человек" data-group="муж">
+            Хуа Юэ - Человек, 21 год, пол мужской
+            <a href="chrsheets/soon.html" class="details-button">Подробнее</a>
+        </li>
+    </ul>
+
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("dropdownMenu");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.button')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+        // Получаем элементы
+        const sortSelect = document.getElementById('sort');
+        const filterRaceSelect = document.getElementById('filter-race');
+        const filterGroupSelect = document.getElementById('filter-group');
+        const characterList = document.getElementById('character-list');
+
+        // Функция для обновления списка
+        function updateList() {
+            const sortBy = sortSelect.value;
+            const filterRace = filterRaceSelect.value;
+            const filterGroup = filterGroupSelect.value;
+
+            // Получаем элементы списка
+            const characters = Array.from(characterList.children);
+
+            // Фильтрация
+            const filtered = characters.filter(character => {
+                const race = character.dataset.race;
+                const group = character.dataset.group;
+
+                return (!filterRace || race === filterRace) &&
+                    (!filterGroup || group === filterGroup);
+            });
+
+            // Сортировка
+            filtered.sort((a, b) => {
+                if (sortBy === 'name') {
+                    return a.dataset.name.localeCompare(b.dataset.name);
+                } else if (sortBy === 'age') {
+                    return Number(a.dataset.age) - Number(b.dataset.age);
+                } else if (sortBy === 'race') {
+                    return a.dataset.race.localeCompare(b.dataset.race);
+                } else if (sortBy === 'group') {
+                    return a.dataset.group.localeCompare(b.dataset.group);
+                }
+                return 0;
+            });
+
+            // Обновляем DOM
+            characterList.innerHTML = '';
+            filtered.forEach(character => characterList.appendChild(character));
+        }
+
+        // Добавляем обработчики событий
+        sortSelect.addEventListener('change', updateList);
+        filterRaceSelect.addEventListener('change', updateList);
+        filterGroupSelect.addEventListener('change', updateList);
+
+        // Первоначальная загрузка
+        updateList();
+
+        // Добавляем обработчик событий на кнопку сброса
+        const resetButton = document.getElementById('reset-filters');
+
+        resetButton.addEventListener('click', () => {
+            // Сбрасываем значения фильтров
+            sortSelect.value = 'name';
+            filterRaceSelect.value = '';
+            filterGroupSelect.value = '';
+
+            // Обновляем список
+            updateList();
+        });
+
+    </script>
+</body>
+
+</html>

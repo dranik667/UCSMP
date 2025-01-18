@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+</html>
+
+<head>
+    <title>Unburning and Collapse SMP</title>
+    <link rel="stylesheet" href="sheet.css">
+    <link rel="icon" type="image/x-icon" href="../img/minecraft_logo.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="nav-links" id="navLinks">
+            <div class="dropdown">
+                <button class="button" onclick="toggleMenu()">&#9776;</button>
+                <div class="dropdown-content" id="dropdownMenu">
+                    <a href="../chrsheets/soon.html">Кредиты</a>
+                    <a href="../index.html#contact">Обратная связь</a>
+                    <a href="../chrsheets/soon.html">О нас</a>
+                    <a href="../gallery.html">Галерея</a>
+                </div>
+            </div>
+
+            <a href="../lore.html">Лор</a>
+            <a href="../character-bios.html">Анкеты персонажей</a>
+            <a href="../index.html">Главная</a>
+        </div>
+    </div>
+
+    <div class="post">
+        <img src="img/church-inside.jpg" alt="Церковь изнутри" class="banner-image">
+
+        <h1>Ленинградская блокада</h1>
+
+        <p>
+            ,,&#10023;.......✟.......&#10023;,,
+            <br><br>
+            &#10095;&#10095;Всё ещё не отошедшие от убийства одной из жительниц Матера, некоторые жители начали замечать
+            что то неладное...
+            <br><br>
+            <cite>
+                "Животные начали куда то пропадать будто в попытке сбежать подальше, трава больше  не растет, а посевы
+                замедлили рост!"<br>
+                                       &#x00A9; Табадай
+            </cite>
+            <br><br>
+            Собравшись на экстренное собрание в церкви, они обсудили проблему и ее масштабы, и в связи с замедлением
+            роста и рождаемости важных для питания ресурсов было принято решение раздавать всем еду.
+            <br><br>
+            &#10023;₊⁺ Список еды для всех граждан Матéра за исключением жителей которые не потребляют данные продукты или
+            являются законными правонарушителями:
+            <br><br>
+        </p>
+            <ul>
+                <li>Хлеб ×1 в день</li>
+
+                <li>Миска грибного супа ×3 в день</li>
+
+                <li>Печеная картошка ×4 в день.</li>
+            </ul>
+            <br><br>
+        <p>
+            Участвующие: Аста, Алекс, Морзе, Марика, Ацора, Табадай
+        </p>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("dropdownMenu");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.button')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+
+    </script>
+</body>

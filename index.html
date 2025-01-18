@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+</html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Unburning and Collapse SMP</title>
+    <link rel="icon" type="image/x-icon" href="img/minecraft_logo.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="nav-links" id="navLinks">
+            <div class="dropdown">
+                <button class="button" onclick="toggleMenu()">&#9776;</button>
+                <div class="dropdown-content" id="dropdownMenu">
+                    <a href="chrsheets/soon.html" class="transition-link">Кредиты</a>
+                    <a href="index.html#contact" class="transition-link">Обратная связь</a>
+                    <a href="chrsheets/soon.html" class="transition-link">О нас</a>
+                    <a href="gallery.html" class="transition-link">Галлерея</a>
+                </div>
+            </div>
+
+            <a href="lore.html">Лор</a>
+            <a href="character-bios.html">Анкеты персонажей</a>
+            <a href="index.html">Главная</a>
+
+        </div>
+    </div>
+
+    <div class="title">
+        <div class="bf">
+            <img src="img/UCSMP.png" alt="UCSMP">
+
+            <h2 style="text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7); margin-bottom: 8em;">Неопалимость и Крах</h2>
+
+        </div>
+
+        <h2 style="margin-bottom: 2em; text-align: center;">Приветствуем на сайте, посвященному серверу Unburning and
+            Collapse SMP!</h2>
+        <div class="butterfly">
+            <img src="img/butterfly.png" alt="красивая бабочка" style="height: 5em; width: auto;">
+            <h2>Наш сервер это:</h2>
+        </div>
+        <ul style="margin-bottom: 10em;">
+            <li>Paper 1.20.1 ;;</li>
+            <li>Версия Java ;;</li>
+            <li>Ванильный майнкрафт с плагинами ;;</li>
+            <li>Платный хостинг ;;</li>
+            <li>Плагин на регистрацию ;;</li>
+        </ul>
+    </div>
+
+    <h2 style="margin-bottom: 2em; text-align: center;">⊹˚₊‧──────────────────────────‧₊˚⊹</h2>
+
+    <div class="hot-news">
+        <h1 class="hot-title">
+            HOT
+            <img src="img/sparkle.gif" alt="Sparkle GIF" class="hot-gif">
+
+            <img src="img/sparkle.gif" alt="Sparkle GIF" class="hot-gif-2">
+        </h1>
+        <div class="cards-container">
+            <div class="card">
+                <h3>Squid Game👧🏻🚦</h3>
+                <img src="img/screenshot.png" alt="Скриншот с места проведения" style="max-height: 300px; width: auto;">
+                <p>Скоро! Новый ивент на сервере UCSMP!! <br>Ребята смогут принять участие в различных играх и
+                    конкурсах, а победителей ждут небольшие призы.</p>
+            </div>
+
+            <div class="card">
+                <h3>Перестройка</h3>
+                <img src="img/screenshot2.png" alt="Скриншот с места проведения">
+                <p>В данный момент, Матéр нуждается в помощи по построению дорог и городских зданий, необходима также
+                    реставрация повреждённых территорий в ходе несанкционированных взрывов. Мы ждём только тебя!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="leather" id="contact">
+        <h1 style="margin-top: 100px; margin-bottom: 250px;">Состав администрации</h1>
+        <div class="cards-container">
+            <!-- Card 1 -->
+            <div class="card">
+                <img src="img/Morze.jpg" alt="Морзе">
+                <h3>Владелец</h3>
+                <a href="https://t.me/gazoneft">Ночнушка :: Морзе</a>
+            </div>
+            <!-- Card 2 -->
+            <div class="card">
+                <img src="img/Sunbeam.jpg" alt="Лучик">
+                <h3>Администратор</h3>
+                <p>Отвечает за ВП, чат, скриншоты, оформление постов</p>
+                <a href="https://t.me/sstraykkidsx">Лучик :: Диана :: Матис</a>
+            </div>
+            <!-- Card 3 -->
+            <div class="card">
+                <img src="img/Aster.jpg" alt="Астер">
+                <h3>Администратор</h3>
+                <p>Помогает владельцу с разного рода делами</p>
+                <a href="https://t.me/on_route66">Астер :: Филия</a>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("dropdownMenu");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.button')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url(img/swamp.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.header {
+    background-color: #ffffff;
+    color: #131227;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    flex-grow: 1;
+    align-items: center;
+}
+
+a {
+    color: #3f2813;
+}
+
+a:hover {
+    color: #A77e31;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.button {
+    background-color: #999999;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #3d3d3d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+@media (max-width: 600px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        background-color: #333;
+        width: 100%;
+        top: 50px;
+        left: 0;
+        z-index: 1;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+        font-size: 24px;
+    }
+}
+
+@font-face {
+    font-family: Rubik;
+    src: url(../fonts/RubikMonoOne-Regular.ttf);
+}
+
+@font-face {
+    font-family: Tektur;
+    src: url(../fonts/Tektur-VariableFont_wdth\,wght.ttf);
+}
+
+h1 {
+    font-family: Rubik;
+    text-align: center;
+    color: #3f2813;
+}
+
+p {
+    font-family: Tektur;
+    text-align: center;
+    color: #14133f;
+    font-size: 24px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+@media (max-width: 768px) {
+    .post {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+
+.post {
+    margin-left: 300px;
+    margin-right: 300px;
+    background-color: rgb(255, 255, 255);
+    height: max-content;
+    min-height: 100vh;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+}
+
+.banner-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+cite {
+    display: inline-block;
+    background-color: rgb(222, 184, 135, 0.5);
+    padding: 10px 40px 10px 15px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-radius: 10px;
+    font-style: italic;
+    font-size: 1.1em;
+    color: #3f2813;
+    position: relative;
+    margin: 10px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+cite::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-image: url('img/feather.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+ul li {
+    font-family: Tektur;
+    color: #14133f;
+    font-size: 30px;
+}
+
+.secret-link {
+    margin-top: 1000px;
+}
+
+.secret-link a, .secret-link a:hover {
+    color: white;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+</html>
+
+<head>
+    <title>Unburning and Collapse SMP</title>
+    <link rel="stylesheet" href="sheet.css">
+    <link rel="icon" type="image/x-icon" href="../img/minecraft_logo.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="nav-links" id="navLinks">
+            <div class="dropdown">
+                <button class="button" onclick="toggleMenu()">&#9776;</button>
+                <div class="dropdown-content" id="dropdownMenu">
+                    <a href="../chrsheets/soon.html">Кредиты</a>
+                    <a href="../index.html#contact">Обратная связь</a>
+                    <a href="../chrsheets/soon.html">О нас</a>
+                    <a href="../gallery.html">Галерея</a>
+                </div>
+            </div>
+
+            <a href="../lore.html">Лор</a>
+            <a href="../character-bios.html">Анкеты персонажей</a>
+            <a href="../index.html">Главная</a>
+        </div>
+    </div>
+
+    <div class="post">
+        <img src="img/concept.jpg" alt="Флаг Матера" class="banner-image">
+        
+        <h1>Боевой турнир</h1>
+
+        <p>
+            Что? Немного шумно возле арены? Доносятся обрывки фраз, смех и крики?Очередная тренировка или же..
+            Второй тур боевого турнира!! В этот полдень всё было как никогда раньше оживлённым...
+            <br><br>
+            Эмоции были различны: и напряжение во время боя, и шуточки после него. Атмосфера была дружеской, ведь главное не
+            победа, а то, как вы провели время
+            <br><br>
+            Победителем второго тура боевого турнира является Сцифо!
+            <br><br>
+            Но, скажу, что остальные участники тоже хорошо постарались!
+            <br><br>
+            Участвующие:
+            <br><br>
+            &#10687; Сражались: Слайм, Химфери, Сцифо, Морзе, Лекси, Ацора.
+            <br><br>
+            &#10687; Наблюдали за боем: Рубиан, Ди, Мево.
+            <br><br>
+            Всем спасибо&#92432;⭒๋<br>
+            <span style="color:white;">p.s первый лор в войсе...</span>
+        </p>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("dropdownMenu");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.button')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+
+    </script>
+</body>

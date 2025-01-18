@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Gallery</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .header {
+            background-color: #ffffff;
+            color: #131227;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            flex-grow: 1;
+            align-items: center;
+        }
+
+        a {
+            color: #3f2813;
+        }
+
+        a:hover {
+            color: #A77e31;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .button {
+            background-color: #999999;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #3d3d3d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                background-color: #333;
+                width: 100%;
+                top: 50px;
+                left: 0;
+                z-index: 1;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+                font-size: 24px;
+            }
+        }
+
+        h1 {
+            color: #2c1711;
+            font-family: Rubik;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            font-family: Tektur;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+        }
+        .gallery-item img,
+        .gallery-item video {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .gallery-item video {
+            max-height: 300px;
+        }
+        .gallery-item p {
+            padding: 10px;
+            text-align: center;
+            font-size: 1rem;
+            color: #555;
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s;
+        }
+
+        @font-face {
+            font-family: Rubik;
+            src: url(fonts/RubikMonoOne-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: Tektur;
+            src: url(fonts/Tektur-VariableFont_wdth\,wght.ttf);
+        }
+
+        cite {
+            display: inline-block;
+            background-color: rgb(222, 184, 135, 0.5);
+            padding: 10px 40px 10px 15px;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border-radius: 10px;
+            font-style: italic;
+            font-size: 1.1em;
+            color: #3f2813;
+            position: relative;
+            margin: 10px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        cite::after {
+            content: '';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-image: url('img/feather.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="nav-links" id="navLinks">
+            <div class="dropdown">
+                <button class="button" onclick="toggleMenu()">&#9776;</button>
+                <div class="dropdown-content" id="dropdownMenu">
+                    <a href="chrsheets/soon.html" class="transition-link">Кредиты</a>
+                    <a href="index.html#contact" class="transition-link">Обратная связь</a>
+                    <a href="chrsheets/soon.html" class="transition-link">О нас</a>
+                    <a href="gallery.html" class="transition-link">Галлерея</a>
+                </div>
+            </div>
+
+            <a href="lore.html">Лор</a>
+            <a href="character-bios.html">Анкеты персонажей</a>
+            <a href="index.html">Главная</a>
+
+        </div>
+    </div>
+    <h1 style="text-align:center; margin:20px 0;">Галлерея</h1>
+    <div class="gallery">
+        <!-- Рисунки -->
+        <div class="gallery-item">
+            <img src="img/art1.jpg" alt="Artwork 1">
+            <p>феликс ах*евший, овечек убивать нельзя!!!</p>
+        </div>
+        <div class="gallery-item">
+            <img src="img/art2.jpg" alt="Artwork 2">
+            <p>у нас новый дуэт (мб пейринг даже) это астер и рубиан если что</p>
+        </div>
+        <div class="gallery-item">
+            <img src="img/art3.jpg" alt="Artwork 3">
+            <p><cite>— Всё, что я чувствую, - это огромную злость и презрение к вам, лжецам и лицемерам. 
+                                                        – Кеннет</cite></p>
+        </div>
+        <div class="gallery-item">
+            <img src="img/art4.jpg" alt="Artwork 2">
+            <p>Artwork</p>
+        </div>
+        <div class="gallery-item">
+            <img src="img/art5.jpg" alt="Artwork 2">
+            <p>раздача парных аватарок с Кеннетом и Ацу ‼️‼️‼️</p>
+        </div>
+        <div class="gallery-item">
+            <img src="img/art6.jpg" alt="Artwork 2">
+            <p>раздача парных аватарок с Кеннетом и Ацу ‼️‼️‼️</p>
+        </div>
+        <div class="gallery-item">
+            <img src="img/art7.jpg" alt="Artwork 2">
+            <p>ураа артики <a href="https://t.me/UCsmp/363">(полная версия с кровью)</a></p>
+        </div>
+        <div class="gallery-item">
+            <img src="img/art8.jpg" alt="Artwork 2">
+            <p>Сердце Кары</p>
+        </div>
+        
+        <!-- Видео -->
+        <div class="gallery-item">
+            <video controls>
+                <source src="img/video1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p>Голоса вуман на НКСМП</p>
+        </div>
+        <div class="gallery-item">
+            <video controls>
+                <source src="img/video2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p>Голоса мэнов на НКСМП</p>
+        </div>
+        <div class="gallery-item">
+            <video controls>
+                <source src="img/video3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p>Наш участник Алекс сделал видео к лору!</p>
+        </div>
+        <div class="gallery-item">
+            <video controls>
+                <source src="img/video4.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p>Ацу молодец</p>
+        </div>
+        <div class="gallery-item">
+            <video controls>
+                <source src="img/video5.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p>Видео к инвету</p>
+        </div>
+        <div class="gallery-item">
+            <video controls>
+                <source src="img/video6.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p>С новым годом!</p>
+        </div>
+        <div class="gallery-item">
+            <video controls>
+                <source src="img/video7.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p>Астер и арбузы</p>
+        </div>
+        
+        <!-- Мемы -->
+        <div class="gallery-item">
+            <img src="img/meme1.jpg" alt="Meme 1">
+            <p>Руби рубин</p>
+        </div>
+        <div class="gallery-item">
+            <img src="img/meme2.jpg" alt="Meme 2">
+            <p>морзе вах*и</p>
+        </div>
+        <div class="gallery-item">
+            <img src="img/meme3.jpg" alt="Meme 2">
+            <p>А ты купи аксолотля</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("dropdownMenu");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.button')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

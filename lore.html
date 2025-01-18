@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <title>Unburning and Collapse SMP</title>
+    <link rel="icon" type="image/x-icon" href="img/minecraft_logo.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            margin: 0;
+            background-color: #ffffff;
+        }
+
+
+        .header {
+            background-color: #ffffff;
+            color: #131227;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            flex-grow: 1;
+            align-items: center;
+        }
+
+        a {
+            color: #3f2813;
+        }
+
+        a:hover {
+            color: #A77e31;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .button {
+            background-color: #999999;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #3d3d3d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                background-color: #333;
+                width: 100%;
+                top: 50px;
+                left: 0;
+                z-index: 1;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+                font-size: 24px;
+            }
+        }
+
+        .card-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px;
+            scrollbar-width: thin;
+            align-items: flex-start;
+        }
+
+        .card-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .card-container::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
+        }
+
+        .card-container::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+        }
+
+        .card {
+            min-width: 300px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 350px;
+            overflow: hidden;
+        }
+
+        .card-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 5px;
+            margin-bottom: 15px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .card-content::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+
+        .card-content:hover::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .card-content:hover::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
+        }
+
+        .card-content:hover::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+        }
+
+        .card .button {
+            background-color: #3f2813;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: block;
+            transition: background-color 0.3s ease;
+            font-family: Tektur;
+            margin-top: auto;
+        }
+
+
+        .card .button:hover {
+            background-color: #A77e31;
+            transition: background-color 0.3s ease;
+            font-family: Tektur;
+        }
+
+        @font-face {
+            font-family: Rubik;
+            src: url(fonts/RubikMonoOne-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: Tektur;
+            src: url(fonts/Tektur-VariableFont_wdth\,wght.ttf);
+        }
+
+        .card h3 {
+            font-family: Rubik;
+        }
+
+        .card p {
+            font-family: Tektur;
+            flex-grow: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        cite {
+            display: inline-block;
+            background-color: rgb(222, 184, 135, 0.5);
+            padding: 10px 40px 10px 15px;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border-radius: 10px;
+            font-style: italic;
+            font-size: 1.1em;
+            color: #3f2813;
+            position: relative;
+            margin: 10px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        cite::after {
+            content: '';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-image: url('img/feather.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .main p {
+            font-family: Tektur;
+            font-size: 30px;
+            color: black;
+            text-align: left;
+            margin: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="nav-links" id="navLinks">
+            <div class="dropdown">
+                <button class="button" onclick="toggleMenu()">&#9776;</button>
+                <div class="dropdown-content" id="dropdownMenu">
+                    <a href="chrsheets/soon.html" class="transition-link">Кредиты</a>
+                    <a href="index.html#contact" class="transition-link">Обратная связь</a>
+                    <a href="chrsheets/soon.html" class="transition-link">О нас</a>
+                    <a href="gallery.html" class="transition-link">Галлерея</a>
+                </div>
+            </div>
+
+            <a href="lore.html">Лор</a>
+            <a href="character-bios.html">Анкеты персонажей</a>
+            <a href="index.html">Главная</a>
+
+        </div>
+    </div>
+
+    <div class="card-container">
+        <!--Лорные карточки вставлять тут-->
+        <div class="card">
+            <h3>Церковь</h3>
+            <div class="card-content">
+                <p>
+                    На территории Матéра находиться церковь на протяжении нескольких столетий, однако, в чем её суть?
+                    Религия один из основных факторов определяющий развитие культуры, а так же, в нашем случае и
+                    двигатель сюжета, поэтому распишу подробнее о нём.
+                </p>
+            </div>
+            <a href="posts/post21.html" class="button">Читать полностью</a>
+        </div>
+
+        <div class="card">
+            <h3>"Сердце" Кары</h3>
+            <div class="card-content">
+                <p>
+                    <i>Несколько столетий назад, в деревушке, где существа были праведны и дружны, нашелся глупец, что
+                        посмел не в лучшем свете написать о Них, в КНИГЕ! Осквернил этим поступком полки церковной
+                        бибилиотеки, навлек беду на всех своих родных... 
+                        Они не потерпят такой неучтивости, отныне спасение - вера, а приговор - голод. 
+                        Но понравилось бы вам быть проклятьем?</i>
+                </p>
+            </div>
+            <a href="posts/post20.html" class="button">Читать полностью</a>
+        </div>
+
+        <div class="card">
+            <h3>Ленинградская блокада</h3>
+            <div class="card-content">
+                <p>
+                    Всё ещё не отошедшие от убийства одной из жительниц Матера, некоторые жители начали замечать что то
+                    неладное...
+                    <br><br>
+                    <cite>"Животные начали куда то пропадать будто в попытке сбежать подальше, трава больше  не растет,
+                        а посевы замедлили рост!"
+                        <br>&#x00A9;Табадай</cite>
+                </p>
+            </div>
+            <a href="posts/post19.html" class="button">Читать полностью</a>
+        </div>
+
+        <!--<div class="card">
+            <h3 style="color: rgba(207, 2, 2);">Суд</h3>
+            <div class="card-content">
+                <p>
+                    Вам бы было приятно, если бы убили вас или вашего близкого человека? Вам приятно жить в одном городе
+                    с убийцей, осознавая, что он может совершить преступление ещё раз, оставаясь безнаказанным?
+                </p>
+            </div>
+            <a href="posts/post18.html" class="button">Читать полностью</a>
+        </div>-->
+
+        <div class="card">
+            <h3>Интерлюдия</h3>
+            <div class="card-content">
+                <p>
+                    События произошедшие начиная с периода после шоу талантов до торжественного открытия.
+
+                    <br><br>Во время похода в выкопанную Слайми шахту за ресурсами, Хими обнаружила несколько красных
+                    ошмётков, похожих на их друга. Однако, подозрение быстро покинуло её мысли, не нужно было раньше
+                    времени накручивать себя, учитывая что все трое, уже несколько недель точно испытывали непонятную,
+                    и, довольно нетипичную усталость.
+                </p>
+            </div>
+            <a href="posts/post17.html" class="button">Читать полностью</a>
+        </div>
+
+        <div class="card">
+            <h3>Следствие вели</h3>
+            <div class="card-content">
+                <p>
+                    Расследование дела медленно, но верно ведётся. Найден адвокат и психолог. Но ночью появляется новый
+                    гость... Ацора, с какой целью? С целью узнать хотя бы что-то из забытого. В любом случае, это лучше,
+                    чем сидеть одному.
+                </p>
+            </div>
+            <a href="posts/post16.html" class="button">Читать полностью</a>
+        </div>
+
+        <!--<div class="card">
+            <h3>Роковой магазин</h3>
+            <div class="card-content">
+                <p>
+                    <cite>"На этом наша краткая речь окончена, добро пожаловать в Sultan's Store!"</cite>
+                    Владельцы магазина, Ацора и Кеннет, подготовили классные конкурсы и многие получили призы за участие
+                    в
+                    них. Под конец мероприятия должна была пройти финальная игра, но...
+                </p>
+            </div>
+            <a href="posts/post15.html" class="button">Читать полностью</a>
+        </div>
+
+        <div class="card">
+            <h3>Наколение событий</h3>
+            <div class="card-content">
+                <p>
+                    <cite>"Вы сомневаетесь в безопасности Матéра?"
+                        <br>"После смерти Энти, да."
+                    <br>&#x00A9;Морзе, Аста</cite>
+                        <br><br>
+                        Из-за несчастного случая, произошедшего на территории топкого места...
+                </p>
+            </div>
+            <a href="posts/post14.html" class="button">Читать полностью</a>
+        </div>-->
+
+        <!--<div class="card">
+            <h3>Похороны</h3>
+            <div class="card-content">
+                <p>
+                    Минута молчания, отпевание, цветы и зажигание свечей, а так же погребенный вместе с умершим фонарь с
+                    голубым освещением, чтобы душа могла отыскать путь в иной мир...
+                </p>
+            </div>
+            <a href="posts/post12.html" class="button">Читать полностью</a>
+        </div>-->
+
+        <div class="card">
+            <h3>Первая жертва</h3>
+            <div class="card-content">
+                <p>
+                    <span style="color: rgba(207, 2, 2);"><b>TW:</b></span> описание смерти.
+
+                    <br><br>Тина. Мерзкая, болотная грязь, издавающая противный хлюпающий звук. Свисающая с деревьев
+                    растительность вновь прилипла к лицу, что даже отмахнувшись осталось ощущение чего-то мокрого,
+                    неприятного.
+                </p>
+            </div>
+            <a href="posts/post11.html" class="button">Читать полностью</a>
+        </div>
+
+        <!--<div class="card">
+            <h3>Купол из белого стекла</h3>
+            <div class="card-content">
+                <p>
+                    Недавняя посиделка у костра обернулась дискуссией, в которой Астой было предложено построить купол
+                    над
+                    главным полем столицы, чтобы уберечь его от осадков, которые не давали растениям спокойно расти.
+                    Тянуть
+                    время нельзя, поскольку запасы пропитания заканчивались быстро.
+                </p>
+            </div>
+            <a href="posts/post10.html" class="button">Читать полностью</a>
+        </div>
+
+        <div class="card">
+            <h3>Вечер у костра</h3>
+            <div class="card-content">
+                <p>
+                    Треск исходящий от костра, подобен прощальному звуку догорающих брёвен. Извивающиеся искривлённые
+                    тени,
+                    что в извращённом подобии танца играют на влажном, лесном покрове. Осадки в последнее время
+                    участились
+                    и, наконец...
+                </p>
+            </div>
+            <a href="posts/post9.html" class="button">Читать полностью</a>
+        </div>
+
+        <div class="card">
+            <h3>Возвращение</h3>
+            <div class="card-content">
+                <p>
+                    Аномалия уничтожена, но появились новые проблемы. Животные некоторых граждан Матéра стали
+                    чувствовать
+                    себя не очень хорошо, а живности в округе стало ещё меньше.
+
+                    <br><br>Правда ли что нечто, заразившее поля столицы полностью ушло?
+                </p>
+            </div>
+            <a href="posts/post8.html" class="button">Читать полностью</a>
+        </div>
+
+        <div class="card">
+            <h3>Открытие бара</h3>
+            <div class="card-content">
+                <p>
+                    На днях был проведён небольшой ивент, связанный с открытием бара, чьим владельцем является Пестик.
+
+                    <br><br>Участники могли немного отвлечься после первой волны голода и провести время в компании друг
+                    друга.
+                </p>
+            </div>
+            <a href="posts/post7.html" class="button">Читать полностью</a>
+        </div>
+
+        <div class="card">
+            <h3>Эксперимент</h3>
+            <div class="card-content">
+                <p>
+                    В изучении непонятного нечто медлить нельзя. Попытки избавления начались незамедлительно! Аномалия
+                    оказалась уязвима к зельям любого типа вреда!
+                    <br><span style="color: #fff;">d0 bd d0 b5 20 d0 b2 d0 b5 d1 80 d1 8c 20 d1 82 d0 be d0 bc d1 83 2c
+                        20
+                        d1 87 d1 82 d0 be 20 d0 b3 d0 be d0 b2 d0 be d1 80 d1 8f d1 82 2e</span>
+                </p>
+            </div>
+            <a href="posts/post6.html" class="button">Читать полностью</a>
+        </div>
+
+        <div class="card">
+            <h3>Первая волна. Начало катастрофы</h3>
+            <div class="card-content">
+                <p>
+                    <i>Вам стало казаться, что животных в округе становится меньше. Растительные культуры тоже выглядят
+                        немного странно, будто-бы... сгнили?</i>
+
+                    <br><cite>"Начало первой волны Великого голода."</cite>
+                </p>
+            </div>
+            <a href="posts/post5.html" class="button">Читать полностью</a>
+        </div>
+
+        <div class="card">
+            <h3>Свидание вслепую</h3>
+            <div class="card-content">
+                <p>
+                    Лёгкий аромат роз и танцующие огоньки свечей, отражающие тени участников, собравшихся в помещении.
+                    Сумерки, солнечный свет не способен помешать обстановке. С улицы слегка дует едва уловимый ветерок,
+                    играясь с листьями растений внутри. Романтика?...
+                </p>
+            </div>
+            <a href="posts/post4.html" class="button">Читать полностью</a>
+        </div>
+
+        <div class="card">
+            <h3>Боевой Турнир</h3>
+            <div class="card-content">
+                <p>
+                    Что? Немного шумно возле арены? Доносятся обрывки фраз, смех и крики? Очередная тренировка или же..
+                    <br><br>Второй тур боевого турнира!! В этот полдень всё было как никогда раньше оживлённым...
+                </p>
+            </div>
+            <a href="posts/post3.html" class="button">Читать полностью</a>
+        </div>
+
+        <div class="card">
+            <h3>Концепция смерти</h3>
+            <div class="card-content">
+                <p>
+                    Человек (и любое другое существо) имеет 4 жизни. С каждой смертью он теряет 1/4 своей памяти. Самая
+                    первая гибель забирает не слишком много воспоминаний, в отличие от последующих, чей ущерб
+                    увеличивается...
+
+                    <br><br><a href="secret1.html" style="color:#fff;">н̸͈̘͂о̶͍͌ ̵͇̻̌я̵̠͖̓̎ ̷̡͇͌̀п̴͙̈̋о̶̳̗̉͗м̴̣̬͠н̶̤̍ю̶̢͕́̈́</a>
+                </p>
+            </div>
+            <a href="posts/post2.html" class="button">Читать полностью</a>
+        </div>-->
+    </div>
+
+        <div class="main">
+            <p>
+                ☆ - Пройденный этап <br>
+                ★ - Текущий этап
+                <br><br>
+                <b>※ Истоки ※</b> <br>
+                • Этап населения ☆ <br>
+                Мирное время, минимальное количество конфликтов, люди спокойно заселяются на территории, обустраивается
+                столица.
+                <br><br>
+                • Переходный этап ☆ <br>
+                ☆ Мало чем отличается от мирного времени, однако, некоторые жители могли заметить как происходят
+                странные вещи. Дождь в этот период начал идти чаще, что было редкостью в таком жарком государстве как
+                Матéр...
+                <br><br>
+                <b>;; Великий Голод</b> ★
+                <br><br>
+                • Волна первая. ☆ <br>
+                Постепенное исчезновение животных с территории, неурожай, растущее напряжение. На полях появляется некая
+                "зараза";"гниль";"плесень", но, оно кажется 'уязвимо' к зельям любого типа вреда, что выяснилось группой
+                граждан. Первое время всё более-менее мирно, существа свободно посещают столицу. Всё списывается на
+                небольшой несезон и не воспринимается серьёзно. Граждане разделились во мнении, одни считают что всё
+                нормально, другие имеют свои подозрения.
+                <br><br>
+                • Волна вторая. ★<br>
+                Начинается с несчастного случая, смерти одного из граждан, что приводит к запрету на посещение болота.
+                Это укрепляет всеобщее недоверие, появляются различные таблички с разными мнениями, происходят
+                дискуссии. Спустя несколько недель происходит убийство, а значит, ещё одна смерть. Домашние животные
+                начинают пропадать, а скот умирать от голода. Поле высыхает, дождь заменяется жарой, выдача еды
+                происходит по талонам в целях экономии. Зараза с полей получает своё название: "Кара" и теперь не
+                кажется уязвимой к зельям вреда. Волна заканчивается исчезновением единственной представительницы
+                столицы. <br>
+                Старший священник предаёт Церковь, раскрывая выстроенную систему, что, не имея ключевого звена и
+                надёжности приводит к краху. Некоторые участники сбегут, опасаясь общественного гнева. В какой-то
+                степени, Церковь как организация ограничивала права существ, выискивая выгоду и создавая неравенства
+                между священнослужителями и обычным народом.
+                <br><br>
+                • Формальное безвластие. <br>
+                Без Церкви пропадает и власть, начинается анархия, недавние события внесут неприятные ассоциации даже с
+                собором, который является лишь зданием. Ситуация с голодом стала чуть лучше, не смотря на это, Кара не
+                уничтожена, в государстве происходит неразбериха. Параллельно с этим, вводится единая единица платежа от
+                лица Поднебесной, организация не является представителем власти, однако малость предотвращает полную
+                разруху государства, задерживая время до возращения лица Матéра. Уровень безработицы в государстве
+                значительно повышается. Этап заканчивается возвращением представительницы Матéра, и какое будет к ней
+                отношение личное дело каждого.
+                <br><br>
+                <cite>Окончание полусезона.</cite>
+            </p>
+        </div>
+
+        <script>
+            function toggleMenu() {
+                const menu = document.getElementById("dropdownMenu");
+                menu.style.display = (menu.style.display === "block") ? "none" : "block";
+            }
+
+            // Close the dropdown if the user clicks outside of it
+            window.onclick = function (event) {
+                if (!event.target.matches('.button')) {
+                    const dropdowns = document.getElementsByClassName("dropdown-content");
+                    for (let i = 0; i < dropdowns.length; i++) {
+                        const openDropdown = dropdowns[i];
+                        if (openDropdown.style.display === "block") {
+                            openDropdown.style.display = "none";
+                        }
+                    }
+                }
+            }
+        </script>
+</body>
+
+</html>

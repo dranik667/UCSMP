@@ -1,0 +1,362 @@
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+    background-image: url("img/old\ paper.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header {
+    background-color: #ffffff;
+    color: #131227;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    flex-grow: 1;
+    align-items: center;
+}
+
+a {
+    color: #3f2813;
+}
+
+a:hover {
+    color: #A77e31;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.button {
+    background-color: #999999;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #3d3d3d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+@media (max-width: 600px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        background-color: #333;
+        width: 100%;
+        top: 50px;
+        left: 0;
+        z-index: 1;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+        font-size: 24px;
+    }
+}
+
+@font-face {
+    font-family: GreatVibes;
+    src: url(fonts/GreatVibes-Regular.ttf);
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    margin-top: 10em;
+    padding: 0;
+}
+
+.title img {
+    width: 70%;
+    height: auto;
+    margin: 0;
+}
+
+h2 {
+    color: #131227;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-size: 2em;
+}
+
+.title ul li {
+    color: #420b0b;
+    font-size: 3em;
+    font-family: GreatVibes;
+}
+
+.butterfly {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.butterfly img {
+    height: 5em;
+    width: auto;
+}
+
+.butterfly h2 {
+    color: #131227;
+    margin: 0;
+    line-height: 1.5;
+    font-size: 2em;
+}
+
+
+.bf {
+    background-image: url("img/bfmultiple.png");
+    background-clip: content-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.leather {
+    background-image: url(img/leather.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 40px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+}
+
+.leather h1 {
+    color: rgba(7, 3, 1, 0.8);
+    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.3);
+    font-size: 4em;
+    margin-bottom: 0.5em;
+}
+
+.leather .cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5em;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.leather .card {
+    background-color: rgba(165, 150, 140, 0.8);
+    box-shadow: 3px 3px 3px rgba(255, 255, 255, 0.2);
+    padding: 1.5em;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-bottom: 200px;
+}
+
+.leather .card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 1em;
+}
+
+.leather .card h3 {
+    color: rgba(34, 0, 0, 0.7);
+    font-size: 1.5em;
+    margin: 0.5em 0;
+}
+
+.leather .card a {
+    color: #140d07;
+    font-size: 1.2em;
+    text-decoration: none;
+    transition: color 0.3s ease, font-size 0.3s ease;
+}
+
+.leather .card a:hover {
+    color: #584531;
+    font-size: 1.4em;
+}
+
+@media (max-width: 800px) {
+    .leather .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .leather .cards-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.hot-news {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3em;
+    margin: 2em 0;
+    text-align: center;
+}
+
+.hot-news .cards-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2em;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.hot-title {
+    font-size: 4em;
+    color: #b60000;
+    font-family: "Impact", "Arial Black", sans-serif;
+    text-shadow:
+        0 0 20px #9c0000,
+        0 0 40px #da0b0b,
+        0 0 60px #e95353,
+        0 0 80px #a30000;
+    animation: flicker 1.5s infinite, glow 3s ease-in-out infinite;
+    position: relative;
+}
+
+.hot-gif {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(5%);
+    width: 100px;
+    pointer-events: none;
+}
+
+.hot-gif-2 {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-110%);
+    width: 100px;
+    pointer-events: none;
+}
+
+
+/* Fire animation */
+@keyframes flicker {
+
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+        opacity: 1;
+    }
+
+    20%,
+    24%,
+    55% {
+        opacity: 0.8;
+    }
+}
+
+/* Subtle pulsing glow */
+@keyframes glow {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 20px #f10000,
+            0 0 40px #da0b0b,
+            0 0 60px #e95353,
+            0 0 80px #a30000;
+    }
+
+    50% {
+        text-shadow:
+            0 0 30px #ff6347,
+            0 0 50px #ffa07a,
+            0 0 70px #ff4500,
+            0 0 100px #ff4500;
+    }
+}
+
+.card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    margin: 1em;
+}
+
+.card h3 {
+    margin: 0.5em 0;
+    font-size: 1.7em;
+    color: #3f2813;
+}
+
+.card p {
+    font-size: 1.1em;
+    color: #292620;
+}
+
+@media (max-width: 600px) {
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    .hot-title {
+        font-size: 3em;
+    }
+}
